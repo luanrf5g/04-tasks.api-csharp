@@ -12,8 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../Tasks.Application/Tasks.Application.csproj"/>
-    <ProjectReference Include="../Tasks.Communication/Tasks.Communication.csproj"/>
+    <ProjectReference Include="../Tasks.Application/Tasks.Application.csproj" />
+    <ProjectReference Include="../Tasks.Communication/Tasks.Communication.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
