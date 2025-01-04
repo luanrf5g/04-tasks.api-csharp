@@ -1,4 +1,4 @@
-using Tasks.API.Services;
+using Tasks.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

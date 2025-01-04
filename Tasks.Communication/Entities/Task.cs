@@ -1,7 +1,7 @@
 using System;
 using Tasks.Communication.Enums;
 
-namespace Tasks.API.Entities;
+namespace Tasks.Communication.Entities;
 
 public class Task
 {
@@ -10,5 +10,5 @@ public class Task
   public string Description { get; set; } = string.Empty;
   public Status Status { get; set; }
   public Priority Priority { get; set; }
-  public DateTime LimiteTime { get; set; }
+  public DateTime LimitTime { get; set; }
 }
