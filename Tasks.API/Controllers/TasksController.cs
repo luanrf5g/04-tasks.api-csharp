@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.AspNetCore.Mvc;
 using Tasks.Application.Services;
 using Tasks.Application.UseCases.Tasks;
@@ -16,6 +17,7 @@ namespace Tasks.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorsListJson), StatusCodes.Status400BadRequest)]
         public IActionResult CreateTask([FromBody] RequestCreateTaskJson request)
         {
             var createTask = new CreateTaskUseCase(_tasksServices);
@@ -26,10 +28,14 @@ namespace Tasks.API.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ResponseFetchTasksJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorsListJson), StatusCodes.Status204NoContent)]
         public IActionResult FetchTasks()
         {
             var useCase = new FetchTasksUseCase(_tasksServices);
             var response = useCase.Execute();
+
+            if (response.Tasks.Count == 0)
+                return NoContent();
 
             return Ok(response);
         }
