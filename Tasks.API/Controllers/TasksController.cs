@@ -50,6 +50,9 @@ namespace Tasks.API.Controllers
 
             var response = detailsTask.Execute(id);
 
+            if (response == null)
+                return NotFound();
+
             return Ok(response);
         }
 
@@ -62,7 +65,21 @@ namespace Tasks.API.Controllers
             var updateTask = new UpdateTaskUseCase(_tasksServices);
             var response = updateTask.Execute(request, id);
 
+            if (response == null)
+                return NotFound();
+
             return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult DeleteTask([FromRoute] int id)
+        {
+            var deleteTask = new DeleteTaskUseCase(_tasksServices);
+            deleteTask.Execute(id);
+
+            return NoContent();
         }
     }
 }

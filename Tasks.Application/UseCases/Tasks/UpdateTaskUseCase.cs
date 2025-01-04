@@ -9,9 +9,12 @@ public class UpdateTaskUseCase(TasksServices tasksServices)
 {
   private readonly TasksServices _tasksServices = tasksServices;
 
-  public Task Execute(RequestUpdateTaskJson request, int id)
+  public Task? Execute(RequestUpdateTaskJson request, int id)
   {
-    var task = _tasksServices.GetTaskById(id) ?? throw new Exception("Task not found");
+    var task = _tasksServices.GetTaskById(id);
+
+    if (task == null)
+      return null;
 
     task.Title = request.Title;
     task.Description = request.Description;

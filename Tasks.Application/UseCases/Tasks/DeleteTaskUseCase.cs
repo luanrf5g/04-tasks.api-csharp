@@ -1,17 +1,19 @@
 using System;
 using Tasks.Application.Services;
-using Task = Tasks.Communication.Entities.Task;
 
 namespace Tasks.Application.UseCases.Tasks;
 
-public class DetailsTaskUseCase(TasksServices tasksServices)
+public class DeleteTaskUseCase(TasksServices tasksServices)
 {
   private readonly TasksServices _tasksServices = tasksServices;
 
-  public Task? Execute(int id)
+  public void Execute(int id)
   {
     var task = _tasksServices.GetTaskById(id) ?? null;
 
-    return task;
+    if (task != null)
+    {
+      _tasksServices._tasks.Remove(task);
+    }
   }
 }
