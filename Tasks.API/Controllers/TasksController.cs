@@ -31,8 +31,8 @@ namespace Tasks.API.Controllers
         [ProducesResponseType(typeof(ResponseErrorsListJson), StatusCodes.Status204NoContent)]
         public IActionResult FetchTasks()
         {
-            var useCase = new FetchTasksUseCase(_tasksServices);
-            var response = useCase.Execute();
+            var fetchTasks = new FetchTasksUseCase(_tasksServices);
+            var response = fetchTasks.Execute();
 
             if (response.Tasks.Count == 0)
                 return NoContent();
@@ -46,9 +46,23 @@ namespace Tasks.API.Controllers
         [ProducesResponseType(typeof(ResponseErrorsListJson), StatusCodes.Status404NotFound)]
         public IActionResult DetailsTask([FromRoute] int id)
         {
-            var task = _tasksServices.GetTaskById(id);
+            var detailsTask = new DetailsTaskUseCase(_tasksServices);
 
-            return Ok(task);
+            var response = detailsTask.Execute(id);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(Task), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorsListJson), StatusCodes.Status404NotFound)]
+        public IActionResult UpdateTask([FromBody] RequestUpdateTaskJson request, [FromRoute] int id)
+        {
+            var updateTask = new UpdateTaskUseCase(_tasksServices);
+            var response = updateTask.Execute(request, id);
+
+            return Ok(response);
         }
     }
 }
