@@ -39,5 +39,16 @@ namespace Tasks.API.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(Task), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorsListJson), StatusCodes.Status404NotFound)]
+        public IActionResult DetailsTask([FromRoute] int id)
+        {
+            var task = _tasksServices.GetTaskById(id);
+
+            return Ok(task);
+        }
     }
 }

@@ -13,4 +13,11 @@ public class TasksServices
   {
     _tasks.Add(task);
   }
+
+  public Task? GetTaskById(int id)
+  {
+    var task = _tasks.FirstOrDefault(task => task.Id == id) ?? throw new Exception("Task not found");
+
+    return task;
+  }
 }
