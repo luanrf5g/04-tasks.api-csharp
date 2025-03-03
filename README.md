@@ -9,4 +9,4 @@
 
 # Skills
 
-[![My Skills](https://skillicons.dev/icons?i=cs,visualstudio&theme=light)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=cs,dotnet,git,visualstudio&theme=light)](https://skillicons.dev)
